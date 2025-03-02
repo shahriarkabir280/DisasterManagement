@@ -1,0 +1,182 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #1a1a1a;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header .logo h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+header nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+header nav ul li {
+    margin-right: 30px;
+    position: relative;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+header nav ul li a:hover,
+header nav ul li a.active {
+    background-color: #4CAF50;
+    transform: scale(1.1);
+}
+
+header nav ul li a.active {
+    background-color: #45a049;
+}
+
+main {
+    padding: 20px;
+}
+
+h2 {
+    color: #333;
+}
+
+.statistics-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.stat-box {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 30%;
+    transition: transform 0.3s ease;
+}
+
+.stat-box h3 {
+    margin: 0;
+    color: #333;
+    font-size: 24px;
+}
+
+.stat-box p {
+    font-size: 36px;
+    font-weight: bold;
+    color: #4CAF50;
+    margin: 10px 0;
+}
+
+
+/* Most Recent Disaster Box */
+#recentDisasterBox {
+    background-color: #1a1a1a;
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 300px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: left;
+}
+
+
+
+.recent-disaster-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 5px;
+    display: inline-block;
+}
+
+.recent-disaster-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.recent-disaster-list li {
+    font-size: 16px;
+    padding: 8px 0;
+    border-left: 4px solid #4CAF50;
+    padding-left: 10px;
+    color: #ddd;
+}
+
+.recent-disaster-list li::before {
+    content: "• ";
+    color: #4CAF50;
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+/* New Styling for Disasters Table */
+#disastersTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border: 1px solid #ddd;
+}
+
+#disastersTable th, #disastersTable td {
+    padding: 12px;
+    text-align: left;
+}
+
+#disastersTable th {
+    background-color: #333;
+    color: white;
+}
+
+#disastersTable td {
+    background-color: white;
+}
+
+.filters {
+    margin-bottom: 20px;
+}
+
+.actions {
+    margin-top: 20px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}

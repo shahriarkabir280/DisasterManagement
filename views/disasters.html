@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disasters - Disaster Management</title>
+  <link rel="stylesheet" href="/css/disasters.css">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <h1>DisasterManagement</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="/" class="active">Disaster</a></li>
+        <li><a href="/reliefs">Reliefs</a></li>
+        <li><a href="/resources">Resources</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Disasters Data</h2>
+
+    <!-- Statistics Container -->
+    <div class="statistics-container">
+      <div class="stat-box">
+        <h3>Number of Disasters</h3>
+        <p id="disasterCount">0</p>
+      </div>
+      <div class="stat-box">
+        <h3>Number of Affected Areas</h3>
+        <p id="affectedAreaCount">0</p>
+      </div>
+      <div id="recentDisasterBox">
+        <p class="recent-disaster-title">Most Recent Disaster</p>
+        <ul class="recent-disaster-list">
+            <li><strong>Name:</strong> <span id="disasterName">N/A</span></li>
+            <li><strong>Date:</strong> <span id="disasterDate">N/A</span></li>
+            <li><strong>Location:</strong> <span id="disasterLocation">N/A</span></li>
+        </ul>
+    </div>
+    </div>
+
+    <div class="filters">
+      <label for="disasterType">Filter by Disaster Type: </label>
+      <select id="disasterType">
+        <option value="all">All</option>
+        <option value="Earthquake">Earthquake</option>
+        <option value="Flood">Flood</option>
+        <option value="Fire">Fire</option>
+      </select>
+  
+      <label for="disasterLocation">Location: </label>
+      <input type="text" id="disasterLocation" placeholder="Enter Location">
+  
+      <label for="disasterDate">Date: </label>
+      <input type="date" id="disasterDate">
+  
+      <button id="fetchData">Fetch Data</button>
+    </div>
+  
+
+    <table id="disastersTable">
+      <thead>
+        <tr>
+          <th>Disaster Type</th>
+          <th>Location</th>
+          <th>Date</th>
+          <th>Severity Level</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data rows will be inserted here dynamically -->
+      </tbody>
+    </table>
+
+    <div class="actions">
+      <button id="addDisaster">Add Disaster</button>
+    </div>
+  </main>
+
+  <script src="/js/disasters.js"></script>
+</body>
+</html>
