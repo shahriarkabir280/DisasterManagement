@@ -59,39 +59,31 @@ router.get('/api', (req, res) => {
 
 
 
-router.get('/api/filter', (req, res) => {
-  const disasterType = req.query.disasterType || 'all';
-  const location = req.query.location || '';  // Empty string as default
-  const date = req.query.date || '';  // Empty string as default
+router.get('/api/search', (req, res) => {
+  const searchQuery = req.query.query || '';  // Default empty string
 
-  // Build the query based on filter parameters
-  let query = 'SELECT * FROM Disaster WHERE 1';
-  const params = [];
-
-  if (disasterType !== 'all') {
-    query += ' AND DisasterType = ?';
-    params.push(disasterType);
-  }
-  if (location) {
-    query += ' AND Location LIKE ?';
-    params.push(`%${location}%`);
-  }
-  if (date) {
-    query += ' AND DateOccurred = ?';
-    params.push(date);
-  }
-
-  query += ' LIMIT 50'; // Limit to 50 rows for performance
+  // Build the query to search in multiple columns (case-insensitive)
+  let query = `
+    SELECT * FROM Disaster 
+    WHERE LOWER(DisasterType) LIKE LOWER(?) 
+    OR LOWER(Location) LIKE LOWER(?) 
+    OR LOWER(Description) LIKE LOWER(?) 
+    OR LOWER(SeverityLevel) LIKE LOWER(?)
+    LIMIT 50
+  `;
+  
+  const wildcardSearch = `%${searchQuery}%`;
+  const params = [wildcardSearch, wildcardSearch, wildcardSearch, wildcardSearch];
 
   db.query(query, params, (err, results) => {
     if (err) {
       console.error(err);
       return res.status(500).send('Error fetching data from the database');
-      
     }
-    res.json(results); // Send the disaster data to the frontend
+    res.json(results); // Send data back to frontend
   });
 });
+
 
 
 // API for fetching disaster statistics

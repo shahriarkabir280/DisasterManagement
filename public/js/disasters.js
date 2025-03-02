@@ -45,29 +45,30 @@ function populateTable(data) {
 }
 
 
-
 document.getElementById('fetchData').addEventListener('click', fetchFilterData);
 
 function fetchFilterData() {
-  const disasterType = document.getElementById('disasterType').value;
-  const location = document.getElementById('disasterLocation').value;
-  const date = document.getElementById('disasterDate').value;
+  let searchQuery = document.getElementById('searchInput').value.trim(); // Trim spaces
 
-  location = location ? location : '';
-  date = date ? date : '';
-  
-  const url = `/disasters/api/filter?disasterType=${disasterType}&location=${location}&date=${date}`;
-  
-  // Ensure location and date are not undefined or empty
- 
+  searchQuery = searchQuery ? encodeURIComponent(searchQuery) : '';
+
+  const url = `/disasters/api/search?query=${searchQuery}`;
 
   fetch(url)
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
     .then(data => {
-      populateTable(data);  // Update the table after fetching data
+      populateTable(data); // Update the table with new data
     })
     .catch(error => console.error('Error fetching data:', error));
 }
+
+
+
 /*
 function fetchFilterData() {
   const disasterType = document.getElementById('disasterType').value;
