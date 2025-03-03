@@ -157,18 +157,35 @@ h2 {
     background-color: white;
 }
 
+
+
 .filters {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     margin-bottom: 20px;
 }
 
-.actions {
-    margin-top: 20px;
+/* Input Field */
+input[type="text"] {
+    width: 250px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
 }
 
+input[type="text"]:focus {
+    border-color: #4CAF50;
+}
+
+/* Search Button */
 button {
     background-color: #4CAF50;
     color: white;
-    padding: 12px;
+    padding: 12px 20px;
     border: none;
     cursor: pointer;
     border-radius: 5px;
@@ -180,3 +197,104 @@ button:hover {
     background-color: #45a049;
     transform: scale(1.05);
 }
+
+/* Action Section */
+.actions {
+    margin-top: 20px;
+}
+
+
+
+
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 30px;
+    border: 1px solid #ccc;
+    width: 40%; /* Adjusted width to prevent the modal from being too wide */
+    max-width: 600px; /* Maximum width to ensure it doesn't exceed a certain size */
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .close {
+    font-size: 32px;
+    color: #aaa;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .close:hover {
+    color: #f00;
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  input, textarea {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  input[type="text"], input[type="email"], textarea {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  @media (max-width: 768px) {
+    .modal-content {
+      width: 80%; /* Responsive for smaller screens */
+      max-width: 500px; /* Limit the width on smaller screens */
+    }
+  }
+  

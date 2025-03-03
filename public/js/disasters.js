@@ -69,30 +69,6 @@ function fetchFilterData() {
 
 
 
-/*
-function fetchFilterData() {
-  const disasterType = document.getElementById('disasterType').value;
-  let location = document.getElementById('disasterLocation').value;
-  let date = document.getElementById('disasterDate').value;
-
-  // Ensure location and date are not undefined or empty
-  location = location ? location : '';
-  date = date ? date : '';
-
-  const url = `/disasters/api/filter?disasterType=${disasterType}&location=${location}&date=${date}`;
-
-  fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      populateFilterTable(data);  // Update the table after fetching data
-    })
-    .catch(error => console.error('Error fetching data:', error));
-}
-*/
-
-
-
-
 function editDisaster(id) {
   alert(`Editing disaster with ID: ${id}`);
   // Add the logic for editing the disaster data based on the ID
@@ -129,10 +105,64 @@ function fetchAndUpdateStatistics() {
 document.addEventListener('DOMContentLoaded', fetchAndUpdateStatistics);
 
 
-
+/*
 // Add disaster action (redirect to a form or modal)
 document.getElementById('addDisaster').addEventListener('click', function() {
   alert('This will open a form to add a new disaster!');
+});*/
+
+
+
+
+
+// Open Modal
+document.getElementById('addDisaster').addEventListener('click', function () {
+  document.getElementById('addDisasterModal').style.display = 'block';
 });
+
+// Close Modal
+document.getElementById('closeModal').addEventListener('click', function () {
+  document.getElementById('addDisasterModal').style.display = 'none';
+});
+
+// Handle Form Submission
+document.getElementById('addDisasterForm').addEventListener('submit', function (event) {
+  event.preventDefault();
+
+  const formData = new FormData(this);
+  let data = Object.fromEntries(formData);
+
+  console.log("Data sent:", data);
+
+  // Ensure DateOccurred is formatted as YYYY-MM-DD
+  if (data.DateOccurred) {
+    data.DateOccurred = new Date(data.DateOccurred).toISOString().split('T')[0];
+    
+  }
+
+  fetch('/disasters/api/add', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  })
+    .then(response => response.json())
+    .then(result => {
+      alert(result.message);
+      document.getElementById('addDisasterModal').style.display = 'none';
+      fetchData(); // Refresh the table
+    })
+    .catch(error => console.error('Error adding disaster:', error));
+});
+
+
+
+
+
+
+
+
+
+
+
 
 

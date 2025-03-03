@@ -23,42 +23,6 @@ router.get('/api', (req, res) => {
 });
 
 
-// // Fetch disaster data with filters
-// router.get('/api/filter', (req, res) => {
-//   const disasterType = req.query.disasterType || 'all';
-//   const location = req.query.location || '';
-//   const date = req.query.date || '';
-
-//   // Build the query based on filter parameters
-//   let query = 'SELECT * FROM Disaster WHERE 1';
-//   const params = [];
-
-//   if (disasterType !== 'all') {
-//     query += ' AND DisasterType = ?';
-//     params.push(disasterType);
-//   }
-//   if (location) {
-//     query += ' AND Location LIKE ?';
-//     params.push(`%${location}%`);
-//   }
-//   if (date) {
-//     query += ' AND DateOccurred = ?';
-//     params.push(date);
-//   }
-
-//   query += ' LIMIT 50'; // Limit to 50 rows for performance
-
-//   db.query(query, params, (err, results) => {
-//     if (err) {
-//       console.error(err);
-//       return res.status(500).send('Error fetching data from the database');
-//     }
-//     res.json(results); // Send the filtered disaster data
-//   });
-// });
-
-
-
 router.get('/api/search', (req, res) => {
   const searchQuery = req.query.query || '';  // Default empty string
 
@@ -92,7 +56,7 @@ router.get('/api/statistics', async (req, res) => {
     // Query for the total number of disasters
     const countQuery = 'SELECT COUNT(*) AS disasterCount FROM Disaster';
     const [countResults] = await db.promise().query(countQuery);
-    console.log(countQuery);
+   
     // Query for the total number of unique affected areas (locations)
     const uniqueLocationQuery = 'SELECT COUNT(DISTINCT Location) AS affectedAreaCount  FROM Disaster';
     const [locationResults] = await db.promise().query(uniqueLocationQuery);
@@ -128,6 +92,73 @@ router.get('/api/statistics', async (req, res) => {
     res.status(500).json({ error: 'Error fetching statistics from the database' });
   }
 });
+
+
+
+// Add a new disaster to the database
+router.post('/api/add', (req, res) => {
+  
+  console.log("Received request body:", req.body); // Debugging
+
+  if (!req.body) {
+    return res.status(400).json({ error: 'Request body is missing' });
+  }
+
+  let { DisasterType, Location, DateOccurred, SeverityLevel, Description } = req.body;
+  console.log(DisasterType+" "+Location+" "+DateOccurred+" "+SeverityLevel+" "+Description);
+
+  if (!DisasterType || !Location || !DateOccurred || !SeverityLevel || !Description) {
+    return res.status(400).json({ error: 'All fields are required' });
+  }
+
+  // Ensure DateOccurred is in YYYY-MM-DD format
+  try {
+    const formattedDate = new Date(DateOccurred).toISOString().split('T')[0];
+
+    const query = `
+      INSERT INTO Disaster (DisasterType, Location, DateOccurred, SeverityLevel, Description)
+      VALUES (?, ?, ?, ?, ?)
+    `;
+
+    const values = [DisasterType, Location, formattedDate, SeverityLevel, Description];
+
+    db.query(query, values, (err, result) => {
+      if (err) {
+        console.error('Error inserting data:', err);
+        return res.status(500).json({ error: 'Failed to insert disaster data' });
+      }
+      res.json({ message: 'Disaster added successfully', id: result.insertId });
+    });
+  } catch (error) {
+    console.error('Error processing date:', error);
+    res.status(400).json({ error: 'Invalid date format' });
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   console.log('It is working');

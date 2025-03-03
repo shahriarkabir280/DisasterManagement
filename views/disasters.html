@@ -74,6 +74,45 @@
     </div>
   </main>
 
+  <!-- Modal for Adding a Disaster -->
+<div id="addDisasterModal" class="modal">
+  <div class="modal-content">
+    <span id="closeModal" class="close">&times;</span>
+    <h2>Add Disaster</h2>
+    <form id="addDisasterForm">
+      <label for="DisasterType">Disaster Type:</label>
+      <select name="DisasterType" required>
+        <option value="Earthquake">Earthquake</option>
+        <option value="Flood">Flood</option>
+        <option value="Fire">Fire</option>
+        <option value="Hurricane">Hurricane</option>
+        <option value="Tornado">Tornado</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label for="Location">Location:</label>
+      <input type="text" name="Location" required>
+
+      <label for="DateOccurred">Date Occurred:</label>
+      <input type="date" name="DateOccurred" required>
+
+      <label for="SeverityLevel">Severity Level:</label>
+      <select name="SeverityLevel" required>
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+        <option value="Critical">Critical</option>
+      </select>
+
+      <label for="Description">Description:</label>
+      <textarea name="Description" required></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+
+
   <script src="/js/disasters.js"></script>
 </body>
 </html>

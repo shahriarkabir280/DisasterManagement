@@ -1,13 +1,19 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const disastersRoutes = require('./routes/disastersRoutes');
+
 
 // Serve static files (CSS, JS)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Routes for each page (Disasters)
-app.use('/disasters', disastersRoutes);
+
+// Middleware to parse JSON
+app.use(express.json());
+app.use(express.urlencoded({ extended: true })); // For form data
+
+// Import Routes AFTER using middleware
+const disasterRoutes = require('./routes/disastersRoutes');
+app.use('/disasters', disasterRoutes);
 
 // Default route redirects to disasters
 app.get('/', (req, res) => {
