@@ -56,6 +56,7 @@
     <table id="disastersTable">
       <thead>
         <tr>
+          <th>DisasterID</th>
           <th>Disaster Type</th>
           <th>Location</th>
           <th>Date</th>
@@ -108,6 +109,46 @@
       <textarea name="Description" required></textarea>
 
       <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+
+
+<!-- Edit Disaster Modal -->
+<div id="editDisasterModal" class="modal">
+  <div class="modal-content">
+    <span id="closeEditModal" class="close">&times;</span>
+    <h2>Edit Disaster</h2>
+    <form id="editDisasterForm">
+      <input type="hidden" id="editDisasterID" name="editDisasterID">
+      <label for="editDisasterType">Disaster Type:</label>
+      <select id="editDisasterType" name="editDisasterType" required>
+        <option value="Earthquake">Earthquake</option>
+        <option value="Flood">Flood</option>
+        <option value="Fire">Fire</option>
+        <option value="Hurricane">Hurricane</option>
+        <option value="Tornado">Tornado</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label for="editLocation">Location:</label>
+      <input type="text" id="editLocation" name="editLocation" required>
+
+      <label for="editDateOccurred">Date Occurred:</label>
+      <input type="date" id="editDateOccurred" name="editDateOccurred" required>
+
+      <label for="editSeverityLevel">Severity Level:</label>
+      <select id="editSeverityLevel" name="editSeverityLevel" required>
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+        <option value="Critical">Critical</option>
+      </select>
+
+      <label for="editDescription">Description:</label>
+      <textarea id="editDescription" name="editDescription" required></textarea>
+
+      <button type="submit">Update</button>
     </form>
   </div>
 </div>

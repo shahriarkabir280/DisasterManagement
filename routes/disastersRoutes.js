@@ -98,7 +98,7 @@ router.get('/api/statistics', async (req, res) => {
 // Add a new disaster to the database
 router.post('/api/add', (req, res) => {
   
-  console.log("Received request body:", req.body); // Debugging
+  //console.log("Received request body:", req.body); // Debugging
 
   if (!req.body) {
     return res.status(400).json({ error: 'Request body is missing' });
@@ -139,6 +139,50 @@ router.post('/api/add', (req, res) => {
 
 
 
+router.get('/api/:id', (req, res) => {
+  const disasterId = req.params.id;
+  const query = 'SELECT * FROM Disaster WHERE DisasterID = ?';
+
+  db.query(query, [disasterId], (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Error fetching disaster data' });
+    }
+    if (results.length === 0) {
+      return res.status(404).json({ error: 'Disaster not found' });
+    }
+    res.json(results[0]);
+  });
+});
+
+
+
+
+
+router.put('/api/update/:id', (req, res) => {
+  const disasterId = req.params.id;
+  const { DisasterType, Location, DateOccurred, SeverityLevel, Description } = req.body;
+
+  if (!DisasterType || !Location || !DateOccurred || !SeverityLevel || !Description) {
+    return res.status(400).json({ error: 'All fields are required' });
+  }
+
+  const formattedDate = new Date(DateOccurred).toISOString().split('T')[0];
+
+  const query = `
+    UPDATE Disaster 
+    SET DisasterType = ?, Location = ?, DateOccurred = ?, SeverityLevel = ?, Description = ?
+    WHERE DisasterID = ?
+  `;
+
+  db.query(query, [DisasterType, Location, formattedDate, SeverityLevel, Description, disasterId], (err, result) => {
+    if (err) {
+      console.error('Error updating disaster:', err);
+      return res.status(500).json({ error: 'Failed to update disaster data' });
+    }
+    res.json({ message: 'Disaster updated successfully' });
+  });
+});
 
 
 
@@ -148,6 +192,19 @@ router.post('/api/add', (req, res) => {
 
 
 
+//deleting a disaster
+router.delete('/api/delete/:id', (req, res) => {
+  const disasterId = req.params.id;
+  const query = 'DELETE FROM Disaster WHERE DisasterID = ?';
+
+  db.query(query, [disasterId], (err, result) => {
+    if (err) {
+      console.error('Error deleting disaster:', err);
+      return res.status(500).json({ error: 'Failed to delete disaster' });
+    }
+    res.json({ message: 'Disaster deleted successfully' });
+  });
+});
 
 
 
@@ -155,12 +212,6 @@ router.post('/api/add', (req, res) => {
 
 
 
-
-
-
-
-
-
-  console.log('It is working');
+console.log('It is working');
   
 module.exports = router;
