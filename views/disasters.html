@@ -14,8 +14,9 @@
     <nav>
       <ul>
         <li><a href="/" class="active">Disaster</a></li>
-        <li><a href="/reliefs">Reliefs</a></li>
-        <li><a href="/resources">Resources</a></li>
+        <li><a href="/victims">Victims</a></li>
+        <li><a href="/volunteer">Volunteer</a></li>
+        <li><a href="/donations">Donations</a></li>
       </ul>
     </nav>
   </header>
@@ -75,7 +76,7 @@
     </div>
   </main>
 
-  <!-- Modal for Adding a Disaster -->
+ <!-- Modal for Adding a Disaster -->
 <div id="addDisasterModal" class="modal">
   <div class="modal-content">
     <span id="closeModal" class="close">&times;</span>
@@ -91,8 +92,15 @@
         <option value="Other">Other</option>
       </select>
 
-      <label for="Location">Location:</label>
-      <input type="text" name="Location" required>
+      <!-- Location Fields -->
+      <label for="City">City:</label>
+      <input type="text" name="City" required>
+
+      <label for="State">State:</label>
+      <input type="text" name="State" required>
+
+      <label for="Country">Country:</label>
+      <input type="text" name="Country" required>
 
       <label for="DateOccurred">Date Occurred:</label>
       <input type="date" name="DateOccurred" required>
@@ -114,15 +122,17 @@
 </div>
 
 
+
 <!-- Edit Disaster Modal -->
 <div id="editDisasterModal" class="modal">
   <div class="modal-content">
     <span id="closeEditModal" class="close">&times;</span>
     <h2>Edit Disaster</h2>
     <form id="editDisasterForm">
-      <input type="hidden" id="editDisasterID" name="editDisasterID">
+      <input type="hidden" id="editDisasterID"> <!-- Hidden field for Disaster ID -->
+
       <label for="editDisasterType">Disaster Type:</label>
-      <select id="editDisasterType" name="editDisasterType" required>
+      <select id="editDisasterType" name="DisasterType" required>
         <option value="Earthquake">Earthquake</option>
         <option value="Flood">Flood</option>
         <option value="Fire">Fire</option>
@@ -131,14 +141,20 @@
         <option value="Other">Other</option>
       </select>
 
-      <label for="editLocation">Location:</label>
-      <input type="text" id="editLocation" name="editLocation" required>
+      <label for="editCity">City:</label>
+      <input type="text" id="editCity" name="City" required>
+
+      <label for="editState">State:</label>
+      <input type="text" id="editState" name="State" required>
+
+      <label for="editCountry">Country:</label>
+      <input type="text" id="editCountry" name="Country" required>
 
       <label for="editDateOccurred">Date Occurred:</label>
-      <input type="date" id="editDateOccurred" name="editDateOccurred" required>
+      <input type="date" id="editDateOccurred" name="DateOccurred" required>
 
       <label for="editSeverityLevel">Severity Level:</label>
-      <select id="editSeverityLevel" name="editSeverityLevel" required>
+      <select id="editSeverityLevel" name="SeverityLevel" required>
         <option value="Low">Low</option>
         <option value="Medium">Medium</option>
         <option value="High">High</option>
@@ -146,7 +162,7 @@
       </select>
 
       <label for="editDescription">Description:</label>
-      <textarea id="editDescription" name="editDescription" required></textarea>
+      <textarea id="editDescription" name="Description" required></textarea>
 
       <button type="submit">Update</button>
     </form>

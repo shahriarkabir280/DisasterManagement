@@ -69,13 +69,6 @@ function fetchFilterData() {
 }
 
 
-
-
-
-
-
-
-
 // Function to fetch and update statistics
 function fetchAndUpdateStatistics() {
   fetch('/disasters/api/statistics')
@@ -103,6 +96,7 @@ function fetchAndUpdateStatistics() {
 document.addEventListener('DOMContentLoaded', fetchAndUpdateStatistics);
 
 
+
 // Open Modal
 document.getElementById('addDisaster').addEventListener('click', function () {
   document.getElementById('addDisasterModal').style.display = 'block';
@@ -124,38 +118,31 @@ document.getElementById('addDisasterForm').addEventListener('submit', function (
 
   // Ensure DateOccurred is formatted as YYYY-MM-DD
   if (data.DateOccurred) {
-    data.DateOccurred = new Date(data.DateOccurred).toISOString().split('T')[0];
-    
+      data.DateOccurred = new Date(data.DateOccurred).toISOString().split('T')[0];
   }
 
   fetch('/disasters/api/add', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
   })
-    .then(response => response.json())
-    .then(result => {
+  .then(response => response.json())
+  .then(result => {
       alert(result.message);
       document.getElementById('addDisasterModal').style.display = 'none';
       fetchData(); // Refresh the table
-    })
-    .catch(error => console.error('Error adding disaster:', error));
+  })
+  .catch(error => console.error('Error adding disaster:', error));
 });
 
 
-
-
-
-
-// Close Modal
+// Close Edit Modal
 document.getElementById('closeEditModal').addEventListener('click', function () {
   document.getElementById('editDisasterModal').style.display = 'none';
 });
 
-
 // Function to edit a disaster
 function editDisaster(disasterId) {
-  // Fetch disaster details and prefill the form in the modal
   fetch(`/disasters/api/${disasterId}`)
     .then(response => response.json())
     .then(data => {
@@ -167,7 +154,9 @@ function editDisaster(disasterId) {
       // Fill the form with existing details
       document.getElementById('editDisasterID').value = data.DisasterID;
       document.getElementById('editDisasterType').value = data.DisasterType;
-      document.getElementById('editLocation').value = data.Location;
+      document.getElementById('editCity').value = data.City;
+      document.getElementById('editState').value = data.State;
+      document.getElementById('editCountry').value = data.Country;
       document.getElementById('editDateOccurred').value = data.DateOccurred;
       document.getElementById('editSeverityLevel').value = data.SeverityLevel;
       document.getElementById('editDescription').value = data.Description;
@@ -185,7 +174,9 @@ document.getElementById('editDisasterForm').addEventListener('submit', function(
   const disasterId = document.getElementById('editDisasterID').value;
   const updatedData = {
     DisasterType: document.getElementById('editDisasterType').value,
-    Location: document.getElementById('editLocation').value,
+    City: document.getElementById('editCity').value,
+    State: document.getElementById('editState').value,
+    Country: document.getElementById('editCountry').value,
     DateOccurred: document.getElementById('editDateOccurred').value,
     SeverityLevel: document.getElementById('editSeverityLevel').value,
     Description: document.getElementById('editDescription').value
@@ -206,13 +197,6 @@ document.getElementById('editDisasterForm').addEventListener('submit', function(
 });
 
 
-
-
-
-
-
-
-
 // Function to delete a disaster
 function deleteDisaster(disasterId) {
   if (!confirm("Are you sure you want to delete this disaster?")) {
@@ -229,6 +213,5 @@ function deleteDisaster(disasterId) {
   })
   .catch(error => console.error('Error deleting disaster:', error));
 }
-
 
 
