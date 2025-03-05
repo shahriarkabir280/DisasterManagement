@@ -136,24 +136,24 @@ h2 {
 }
 
 /* New Styling for Disasters Table */
-#disastersTable {
+#victimsTable {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
     border: 1px solid #ddd;
 }
 
-#disastersTable th, #disastersTable td {
+#victimsTable th, #victimsTable td {
     padding: 12px;
     text-align: left;
 }
 
-#disastersTable th {
+#victimsTable th {
     background-color: #333;
     color: white;
 }
 
-#disastersTable td {
+#victimsTable td {
     background-color: white;
 }
 
@@ -204,10 +204,6 @@ button:hover {
 }
 
 
-
-
-
-
 .modal {
     display: none;
     position: fixed;
@@ -224,12 +220,12 @@ button:hover {
     background-color: white;
     padding: 30px;
     border: 1px solid #ccc;
-    width: 40%; /* Adjusted width to prevent the modal from being too wide */
-    max-width: 600px; /* Maximum width to ensure it doesn't exceed a certain size */
+    width: 70%; /* Increased width to give more space */
+    max-width: 800px; /* Maximum width for large screens */
     border-radius: 12px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     position: absolute;
     top: 50%;
@@ -288,13 +284,70 @@ button:hover {
   form {
     display: flex;
     flex-direction: column;
+    gap: 20px;
+  }
+  
+  form .half-width {
+    display: flex;
     gap: 15px;
+    flex-wrap: wrap; /* Allow elements to wrap when necessary */
+  }
+  
+  form .half-width div {
+    flex: 1 1 48%; /* Flexbox for equal spacing and allow wrapping */
+  }
+  
+  form .half-width label {
+    margin-bottom: 8px;
+  }
+  
+  form .affected-location {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap; /* Allow location fields to wrap */
+  }
+  
+  form .affected-location div {
+    flex: 1 1 30%; /* Adjust the width for affected location fields */
+  }
+  
+  form .affected-location label {
+    margin-bottom: 8px; /* Add spacing below label */
+  }
+  
+  form .affected-location input {
+    width: 100%; /* Ensure full width within its container */
+  }
+  
+  form select, form textarea {
+    width: 100%; /* Full width for select and textarea fields */
   }
   
   @media (max-width: 768px) {
     .modal-content {
-      width: 80%; /* Responsive for smaller screens */
+      width: 85%; /* Responsive for smaller screens */
       max-width: 500px; /* Limit the width on smaller screens */
     }
+  
+    form .half-width {
+      flex-direction: column; /* Stack fields vertically on smaller screens */
+    }
+  
+    form .half-width div {
+      flex: unset; /* Full width on smaller screens */
+    }
+  
+    form .affected-location {
+      flex-direction: column; /* Stack location fields on smaller screens */
+    }
+  
+    form .affected-location div {
+      flex: unset; /* Full width on smaller screens */
+    }
+  
+    form .affected-location input {
+      width: 100%; /* Full width on smaller screens */
+    }
   }
+  
   

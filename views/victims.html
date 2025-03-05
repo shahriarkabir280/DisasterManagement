@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Victims - Disaster Management</title>
-  <link rel="stylesheet" href="/css/victims.css"> <!-- Link to CSS -->
+  <link rel="stylesheet" href="/css/victims.css">
 </head>
 <body>
   <header>
@@ -13,8 +13,8 @@
     </div>
     <nav>
       <ul>
-        <li><a href="/disasters">Disaster</a></li>
-        <li><a href="/victims" class="active">Victim</a></li> <!-- Active link -->
+        <li><a href="/">Disaster</a></li>
+        <li><a href="/victims" class="active">Victim</a></li>
         <li><a href="/rescueOperations">RescueOperation</a></li>
         <li><a href="/volunteers">Volunteer</a></li>
         <li><a href="/donations">Donation</a></li>
@@ -24,9 +24,212 @@
 
   <main>
     <h2>Victims Data</h2>
-    <!-- Add your content here -->
+
+    <!-- Statistics Container -->
+    <div class="statistics-container">
+      <div class="stat-box">
+        <h3>Number of Disasters</h3>
+        <p id="disasterCount">0</p>
+      </div>
+      <div class="stat-box">
+        <h3>Number of Affected Areas</h3>
+        <p id="affectedAreaCount">0</p>
+      </div>
+      <div id="recentDisasterBox">
+        <p class="recent-disaster-title">Most Recent Disaster</p>
+        <ul class="recent-disaster-list">
+            <li><strong>Name:</strong> <span id="disasterName">N/A</span></li>
+            <li><strong>Date:</strong> <span id="disasterDate">N/A</span></li>
+            <li><strong>Location:</strong> <span id="disasterLocation">N/A</span></li>
+        </ul>
+    </div>
+    </div>
+
+    
+
+    <div class="filters">
+      <label for="searchInput">Search: </label>
+      <input type="text" id="searchInput" placeholder="Search by any attributes...">
+      <button id="fetchData">Search</button>
+    </div>
+    
+  
+
+    <table id="victimsTable">
+      <thead>
+        <tr>
+          <th>VictimID</th>
+          <th>FirstName</th>
+          <th>LastName</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>ContactNumber</th>
+          <th>Address</th>
+          <th>Status</th>
+          <th>Location</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data rows will be inserted here dynamically -->
+      </tbody>
+    </table>
+
+    <div class="actions">
+      <button id="addVictim">Add Victim</button>
+    </div>
   </main>
 
-  <script src="/js/victims.js"></script> <!-- Link to JS -->
+<!-- Modal for adding a Victim -->
+<div id="addVictimModal" class="modal">
+  <div class="modal-content">
+    <span id="closeModal" class="close">&times;</span>
+    <h2>Add Victim</h2>
+    <form id="addVictimForm">
+      <!-- Victim Details -->
+      <div class="half-width">
+        <div>
+          <label for="FirstName">First Name:</label>
+          <input type="text" name="FirstName" required>
+        </div>
+        <div>
+          <label for="LastName">Last Name:</label>
+          <input type="text" name="LastName" required>
+        </div>
+      </div>
+
+      <div class="half-width">
+        <div>
+          <label for="Age">Age:</label>
+          <input type="number" name="Age" required>
+        </div>
+        <div>
+          <label for="Gender">Gender:</label>
+          <select name="Gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+      
+
+      <div>
+        <label for="ContactNumber">Contact Number:</label>
+        <input type="text" name="ContactNumber">
+      </div>
+      
+      <div>
+      <label for="Address">Address:</label>
+      <textarea name="Address"></textarea>
+      </div>
+
+      <label for="Status">Status:</label>
+      <select name="Status" required>
+        <option value="Missing">Missing</option>
+        <option value="Injured">Injured</option>
+        <option value="Deceased">Deceased</option>
+        <option value="Safe">Safe</option>
+      </select>
+
+      <!-- Affected Area Location -->
+      <h3>Affected Area Location:</h3>
+      <div class="affected-location">
+        <div>
+          <label for="City">City:</label>
+          <input type="text" name="City" required>
+        </div>
+        <div>
+          <label for="State">State:</label>
+          <input type="text" name="State" required>
+        </div>
+        <div>
+          <label for="Country">Country:</label>
+          <input type="text" name="Country" required>
+        </div>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+
+<!-- Edit Victim Modal -->
+<div id="editVictimModal" class="modal">
+  <div class="modal-content">
+    <span id="closeEditModal" class="close">&times;</span>
+    <h2>Edit Victim</h2>
+    <form id="editVictimForm">
+      <input type="hidden" id="editVictimID"> <!-- Hidden field for Victim ID -->
+
+      <!-- First Name & Last Name in one row -->
+      <div class="half-width">
+        <div>
+          <label for="editFirstName">First Name:</label>
+          <input type="text" id="editFirstName" name="FirstName" required>
+        </div>
+        <div>
+          <label for="editLastName">Last Name:</label>
+          <input type="text" id="editLastName" name="LastName" required>
+        </div>
+      </div>
+
+      <!-- Age & Gender in one row -->
+      <div class="half-width">
+        <div>
+          <label for="editAge">Age:</label>
+          <input type="number" id="editAge" name="Age" required>
+        </div>
+        <div>
+          <label for="editGender">Gender:</label>
+          <select id="editGender" name="Gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <label for="editContactNumber">Contact Number:</label>
+      <input type="text" id="editContactNumber" name="ContactNumber">
+
+      <label for="editAddress">Address:</label>
+      <textarea id="editAddress" name="Address"></textarea>
+
+      <label for="editStatus">Status:</label>
+      <select id="editStatus" name="Status" required>
+        <option value="Missing">Missing</option>
+        <option value="Injured">Injured</option>
+        <option value="Deceased">Deceased</option>
+        <option value="Safe">Safe</option>
+      </select>
+
+      <!-- Affected Area Location -->
+      <h3>Affected Area Location</h3>
+      <div class="affected-location">
+        <div>
+          <label for="editCity">City:</label>
+          <input type="text" id="editCity" name="City" required>
+        </div>
+        <div>
+          <label for="editState">State:</label>
+          <input type="text" id="editState" name="State" required>
+        </div>
+        <div>
+          <label for="editCountry">Country:</label>
+          <input type="text" id="editCountry" name="Country" required>
+        </div>
+      </div>
+
+      <button type="submit">Update</button>
+    </form>
+  </div>
+</div>
+
+
+
+  
+
+  <script src="/js/victims.js"></script>
 </body>
 </html>
