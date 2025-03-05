@@ -69,6 +69,41 @@ router.get('/api/search', (req, res) => {
 });
 
 
+// API for fetching volunteer statistics
+router.get('/api/volunteer-statistics', async (req, res) => {
+  try {
+    // Query for the total number of volunteers
+    const totalVolunteersQuery = 'SELECT COUNT(*) AS totalVolunteers FROM Volunteer';
+    const [totalResults] = await db.promise().query(totalVolunteersQuery);
+
+    // Query for the number of available volunteers
+    const availableVolunteersQuery = 'SELECT COUNT(*) AS availableVolunteers FROM Volunteer WHERE AvailabilityStatus = "Available"';
+    const [availableResults] = await db.promise().query(availableVolunteersQuery);
+
+    // Query for the number of appointed (busy) volunteers
+    const appointedVolunteersQuery = 'SELECT COUNT(*) AS appointedVolunteers FROM Volunteer WHERE AvailabilityStatus = "Busy"';
+    const [appointedResults] = await db.promise().query(appointedVolunteersQuery);
+
+    // Extract values safely
+    const totalVolunteers = totalResults[0]?.totalVolunteers || 0;
+    const availableVolunteers = availableResults[0]?.availableVolunteers || 0;
+    const appointedVolunteers = appointedResults[0]?.appointedVolunteers || 0;
+
+    // Return JSON response
+    res.json({
+      totalVolunteers,
+      availableVolunteers,
+      appointedVolunteers,
+    });
+
+  } catch (err) {
+    console.error('Error fetching volunteer statistics:', err);
+    res.status(500).json({ error: 'Error fetching volunteer statistics from the database' });
+  }
+});
+
+
+
 // API route for adding a volunteer
 router.post('/api/addVolunteer', (req, res) => {
   if (!req.body) {

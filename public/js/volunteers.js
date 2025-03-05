@@ -68,6 +68,26 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
 
+// Fetch volunteer statistics and display them in the HTML container
+function fetchVolunteerStatistics() {
+  fetch('/volunteers/api/volunteer-statistics')
+    .then(response => response.json())
+    .then(data => {
+      const { totalVolunteers, availableVolunteers, appointedVolunteers } = data;
+      
+      // Update the statistics in the HTML
+      document.getElementById('Total').textContent = totalVolunteers;
+      document.getElementById('Available').textContent = availableVolunteers;
+      document.getElementById('Already Appointed').textContent = appointedVolunteers;
+    })
+    .catch(error => console.error('Error fetching volunteer statistics:', error));
+}
+
+// Call this function to fetch and display statistics when the page loads
+fetchVolunteerStatistics();
+
+
+
   // Open Modal to add volunteer
 document.getElementById('addVolunteer').addEventListener('click', function () {
     document.getElementById('addVolunteerModal').style.display = 'block';

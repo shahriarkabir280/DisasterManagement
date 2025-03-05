@@ -91,50 +91,6 @@ h2 {
 }
 
 
-/* Most Recent Disaster Box */
-#recentDisasterBox {
-    background-color: #1a1a1a;
-    color: white;
-    padding: 20px;
-    border-radius: 12px;
-    width: 400px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: left;
-}
-
-
-
-.recent-disaster-title {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    border-bottom: 2px solid #4CAF50;
-    padding-bottom: 5px;
-    display: inline-block;
-}
-
-.recent-disaster-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-.recent-disaster-list li {
-    font-size: 16px;
-    padding: 8px 0;
-    border-left: 4px solid #4CAF50;
-    padding-left: 10px;
-    color: #ddd;
-}
-
-.recent-disaster-list li::before {
-    content: "• ";
-    color: #4CAF50;
-    font-size: 18px;
-    font-weight: bold;
-    margin-right: 5px;
-}
 
 
 /* Volunteer Table */
