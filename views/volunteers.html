@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Victims - Disaster Management</title>
-  <link rel="stylesheet" href="/css/volunteers.css"> <!-- Link to CSS -->
+  <title>Volunteers - Disaster Management</title>
+  <link rel="stylesheet" href="/css/volunteers.css">
 </head>
 <body>
   <header>
@@ -13,8 +13,8 @@
     </div>
     <nav>
       <ul>
-        <li><a href="/disasters">Disaster</a></li>
-        <li><a href="/victims">Victim</a></li> <!-- Active link -->
+        <li><a href="/">Disaster</a></li>
+        <li><a href="/victims">Victim</a></li>
         <li><a href="/rescueOperations">RescueOperation</a></li>
         <li><a href="/volunteers" class="active">Volunteer</a></li>
         <li><a href="/donations">Donation</a></li>
@@ -23,10 +23,120 @@
   </header>
 
   <main>
-    <h2>Volunteer Data</h2>
-    <!-- Add your content here -->
+    <h2>Volunteers Data</h2>
+
+
+    <!-- Statistics Container -->
+    <div class="statistics-container">
+      <div class="stat-box">
+        <h3>Number of Disasters</h3>
+        <p id="disasterCount">0</p>
+      </div>
+      <div class="stat-box">
+        <h3>Number of Affected Areas</h3>
+        <p id="affectedAreaCount">0</p>
+      </div>
+      <div id="recentDisasterBox">
+        <p class="recent-disaster-title">Most Recent Disaster</p>
+        <ul class="recent-disaster-list">
+            <li><strong>Name:</strong> <span id="disasterName">N/A</span></li>
+            <li><strong>Date:</strong> <span id="disasterDate">N/A</span></li>
+            <li><strong>Location:</strong> <span id="disasterLocation">N/A</span></li>
+        </ul>
+    </div>
+    </div>
+
+
+
+
+    <div class="filters">
+      <label for="searchInput">Search: </label>
+      <input type="text" id="searchInput" placeholder="Search by name, skills, or status...">
+      <button id="fetchData">Search</button>
+    </div>
+    
+    <table id="volunteersTable">
+      <thead>
+        <tr>
+          <th>Volunteer ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Contact Number</th>
+          <th>Skills</th>
+          <th>Availability</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data rows will be inserted here dynamically -->
+      </tbody>
+    </table>
+
+    <div class="actions">
+      <button id="addVolunteer">Add Volunteer</button>
+    </div>
   </main>
 
-  <script src="/js/volunteers.js"></script> <!-- Link to JS -->
+  <!-- Modal for Adding a Volunteer -->
+  <div id="addVolunteerModal" class="modal">
+    <div class="modal-content">
+      <span id="closeModal" class="close">&times;</span>
+      <h2>Add Volunteer</h2>
+      <form id="addVolunteerForm">
+        <label for="FirstName">First Name:</label>
+        <input type="text" name="FirstName" required>
+
+        <label for="LastName">Last Name:</label>
+        <input type="text" name="LastName" required>
+
+        <label for="ContactNumber">Contact Number:</label>
+        <input type="text" name="ContactNumber">
+
+        <label for="Skills">Skills:</label>
+        <input type="text" name="Skills">
+
+        <label for="AvailabilityStatus">Availability:</label>
+        <select name="AvailabilityStatus" required>
+          <option value="Available">Available</option>
+          <option value="Busy">Busy</option>
+        </select>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Edit Volunteer Modal -->
+  <div id="editVolunteerModal" class="modal">
+    <div class="modal-content">
+      <span id="closeEditModal" class="close">&times;</span>
+      <h2>Edit Volunteer</h2>
+      <form id="editVolunteerForm">
+        <input type="hidden" id="editVolunteerID"> <!-- Hidden field for Volunteer ID -->
+
+        <label for="editFirstName">First Name:</label>
+        <input type="text" id="editFirstName" name="FirstName" required>
+
+        <label for="editLastName">Last Name:</label>
+        <input type="text" id="editLastName" name="LastName" required>
+
+        <label for="editContactNumber">Contact Number:</label>
+        <input type="text" id="editContactNumber" name="ContactNumber">
+
+        <label for="editSkills">Skills:</label>
+        <input type="text" id="editSkills" name="Skills">
+
+        <label for="editAvailabilityStatus">Availability:</label>
+        <select id="editAvailabilityStatus" name="AvailabilityStatus" required>
+          <option value="Available">Available</option>
+          <option value="Busy">Busy</option>
+        </select>
+
+        <button type="submit">Update</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/volunteers.js"></script>
 </body>
 </html>
