@@ -13,7 +13,18 @@ app.use(express.urlencoded({ extended: true })); // For form data
 
 // Import Routes AFTER using middleware
 const disasterRoutes = require('./routes/disastersRoutes');
+const victimsRoutes = require('./routes/victimsRoutes'); // Import Victims routes
+const rescueoperationsRoutes = require('./routes/rescueoperationsRoutes');
+const volunteersRoutes = require('./routes/volunteersRoutes');
+const donationsRoutes = require('./routes/donationsRoutes');
+
 app.use('/disasters', disasterRoutes);
+app.use('/victims', victimsRoutes); // Use Victims routes
+app.use('/rescueoperations', rescueoperationsRoutes);
+app.use('/volunteers', volunteersRoutes);
+app.use('/donations', donationsRoutes);
+
+
 
 // Default route redirects to disasters
 app.get('/', (req, res) => {
