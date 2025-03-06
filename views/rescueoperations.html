@@ -3,30 +3,238 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Victims - Disaster Management</title>
-  <link rel="stylesheet" href="/css/rescueoperations.css"> <!-- Link to CSS -->
+  <title>Rescue Operations - Disaster Management</title>
+  <link rel="stylesheet" href="/css/rescueoperations.css">
 </head>
 <body>
   <header>
     <div class="logo">
-      <h1>DisasterManagement</h1>
+      <h1>Disaster Management</h1>
     </div>
     <nav>
       <ul>
-        <li><a href="/disasters">Disaster</a></li>
-        <li><a href="/victims">Victim</a></li> <!-- Active link -->
+        <li><a href="/">Disaster</a></li>
+        <li><a href="/victims">Victim</a></li>
         <li><a href="/rescueOperations" class="active">RescueOperation</a></li>
         <li><a href="/volunteers">Volunteer</a></li>
         <li><a href="/donations">Donation</a></li>
       </ul>
     </nav>
   </header>
-
+  
   <main>
-    <h2>RescueOperation Data</h2>
-    <!-- Add your content here -->
+    <h2>Rescue Operations Data</h2>
+    <!-- Statistics Container -->
+  <div class="statistics-container">
+    <div class="stat-box">
+      <h3>Number of Disasters</h3>
+      <p id="disasterCount">0</p>
+    </div>
+    <div class="stat-box">
+      <h3>Number of Affected Areas</h3>
+      <p id="affectedAreaCount">0</p>
+    </div>
+    <div id="recentDisasterBox">
+      <p class="recent-disaster-title">Most Recent Disaster</p>
+      <ul class="recent-disaster-list">
+          <li><strong>Name:</strong> <span id="disasterName">N/A</span></li>
+          <li><strong>Date:</strong> <span id="disasterDate">N/A</span></li>
+          <li><strong>Location:</strong> <span id="disasterLocation">N/A</span></li>
+      </ul>
+    </div>
+  </div>
+
+
+    <div class="filters">
+      <label for="searchInput">Search: </label>
+      <input type="text" id="searchRescueOperations" placeholder="Search Rescue Operations...">
+      <button id="fetchRescueOperationsData">Search</button>
+      <a href="/rescueTeams" class="show-rescue-teams-btn">Show Rescue Teams</a>
+
+    </div>
+    
+    <div class="table-container">
+      <table id="rescueOperationsTable">
+        <thead>
+          <tr>
+            <th>Operation ID</th>
+            <th>Disaster Name</th>
+            <th>Team Name</th>
+            <th>Affected Area</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Data rows will be inserted here dynamically -->
+        </tbody>
+      </table>
+    </div>
+    <div class="actions">
+      <button id="addRescueOperation">Add Rescue Operation</button>
+    </div>
   </main>
 
-  <script src="/js/rescueOperations.js"></script> <!-- Link to JS -->
+  <!-- Modal for Adding a Rescue Operation -->
+<div id="addRescueOperationModal" class="modal">
+  <div class="modal-content">
+    <span id="closeModal" class="close">&times;</span>
+    <h2>Add Rescue Operation</h2>
+    <form id="addRescueOperationForm">
+      <label for="DisasterName">Disaster Name:</label>
+      <input type="text" name="DisasterName" required>
+      <label for="SeverityLevel">Severity Level:</label>
+      <select name="SeverityLevel" required>
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+        <option value="Critical">Critical</option>
+      </select>
+
+      
+      <!-- Team Info Section -->
+      <h3>Team Info</h3>
+      <div class="team-info">
+        <div>
+          <label for="TeamName">Team Name:</label>
+          <input type="text" name="TeamName" required>
+        </div>
+        <div>
+          <label for="TeamType">Team Type:</label>
+          <input type="text" name="TeamType" required>
+        </div>
+        <div>
+          <label for="ContactNumber">Contact Number:</label>
+          <input type="text" name="ContactNumber">
+        </div>
+      </div>
+
+      <!-- Start Date and End Date Section -->
+      <h3>Operation Dates</h3>
+      <div class="operation-dates">
+        <div>
+          <label for="StartDate">Start Date:</label>
+          <input type="date" name="StartDate" required>
+        </div>
+        <div>
+          <label for="EndDate">End Date:</label>
+          <input type="date" name="EndDate">
+        </div>
+      </div>
+
+      <label for="Status">Status:</label>
+      <select name="Status" required>
+        <option value="Ongoing">Ongoing</option>
+        <option value="Completed">Completed</option>
+        <option value="Pending">Pending</option>
+      </select>
+
+      <!-- Affected Area Location -->
+      <h3>Affected Area Location:</h3>
+      <div class="affected-location">
+        <div>
+          <label for="City">City:</label>
+          <input type="text" name="City" required>
+        </div>
+        <div>
+          <label for="State">State:</label>
+          <input type="text" name="State" required>
+        </div>
+        <div>
+          <label for="Country">Country:</label>
+          <input type="text" name="Country" required>
+        </div>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+
+
+
+<!-- Edit Rescue Operation Modal -->
+<div id="editRescueOperationModal" class="modal">
+  <div class="modal-content">
+    <span id="closeEditModal" class="close">&times;</span>
+    <h2>Edit Rescue Operation</h2>
+    <form id="editRescueOperationForm">
+      <input type="hidden" id="editRescueOperationID"> <!-- Hidden field for Rescue Operation ID -->
+
+      <label for="editDisasterName">Disaster Name:</label>
+      <input type="text" id="editDisasterName" name="DisasterName" required>
+
+      <label for="editSeverityLevel">Severity Level:</label>
+      <select id="editSeverityLevel" name="SeverityLevel" required>
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+        <option value="Critical">Critical</option>
+      </select>
+
+      <!-- Team Info Section -->
+      <h3>Team Info</h3>
+      <div class="team-info">
+        <div>
+          <label for="editTeamName">Team Name:</label>
+          <input type="text" id="editTeamName" name="TeamName" required>
+        </div>
+        <div>
+          <label for="editTeamType">Team Type:</label>
+          <input type="text" id="editTeamType" name="TeamType" required>
+        </div>
+        <div>
+          <label for="editContactNumber">Contact Number:</label>
+          <input type="text" id="editContactNumber" name="ContactNumber">
+        </div>
+      </div>
+
+      <!-- Start Date and End Date Section -->
+      <h3>Operation Dates</h3>
+      <div class="operation-dates">
+        <div>
+          <label for="editStartDate">Start Date:</label>
+          <input type="date" id="editStartDate" name="StartDate" required>
+        </div>
+        <div>
+          <label for="editEndDate">End Date:</label>
+          <input type="date" id="editEndDate" name="EndDate">
+        </div>
+      </div>
+
+      <label for="editStatus">Status:</label>
+      <select id="editStatus" name="Status" required>
+        <option value="Ongoing">Ongoing</option>
+        <option value="Completed">Completed</option>
+        <option value="Pending">Pending</option>
+      </select>
+
+      <!-- Affected Area Location -->
+      <h3>Affected Area Location:</h3>
+      <div class="affected-location">
+        <div>
+          <label for="editCity">City:</label>
+          <input type="text" id="editCity" name="City" required>
+        </div>
+        <div>
+          <label for="editState">State:</label>
+          <input type="text" id="editState" name="State" required>
+        </div>
+        <div>
+          <label for="editCountry">Country:</label>
+          <input type="text" id="editCountry" name="Country" required>
+        </div>
+      </div>
+
+      <button type="submit">Update</button>
+    </form>
+  </div>
+</div>
+
+
+
+  <script src="/js/rescueoperations.js"></script>
 </body>
 </html>

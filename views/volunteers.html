@@ -24,8 +24,7 @@
 
   <main>
     <h2>Volunteers Data</h2>
-
-
+  
     <!-- Statistics Container -->
     <div class="statistics-container">
       <div class="stat-box">
@@ -40,39 +39,41 @@
         <h3>Available</h3>
         <p id="Available">0</p>
       </div>
-      
     </div>
-
-
-
-
+  
     <div class="filters">
       <label for="searchInput">Search: </label>
       <input type="text" id="searchInput" placeholder="Search by name, skills, or status...">
       <button id="fetchData">Search</button>
     </div>
-    
-    <table id="volunteersTable">
-      <thead>
-        <tr>
-          <th>Volunteer ID</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Contact Number</th>
-          <th>Skills</th>
-          <th>Availability</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Data rows will be inserted here dynamically -->
-      </tbody>
-    </table>
-
+  
+  
+    <!-- Table Container (Head fixed, body scrollable) -->
+    <div class="table-container">
+      <table id="volunteersTable">
+        <thead>
+          <tr>
+            <th>Volunteer ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Contact Number</th>
+            <th>Skills</th>
+            <th>Availability</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Data rows will be inserted here dynamically -->
+        </tbody>
+      </table>
+      <!-- Add Volunteer Button (Left Side) -->
+    </div>
+    <!-- Add Volunteer Button (Left Side) -->
     <div class="actions">
       <button id="addVolunteer">Add Volunteer</button>
     </div>
   </main>
+  
 
   <!-- Modal for Adding a Volunteer -->
   <div id="addVolunteerModal" class="modal">

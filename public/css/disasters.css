@@ -135,27 +135,41 @@ h2 {
     margin-right: 5px;
 }
 
-/* New Styling for Disasters Table */
-#disastersTable {
+.table-container {
+    max-height: 400px;  /* Adjust this height as necessary */
+    overflow-y: auto;   /* Enables vertical scrolling */
+    margin-bottom: 20px; /* Space between table and button */
+  }
+  
+  .table-container {
+    max-height: 400px;  /* Adjust this height as necessary */
+    overflow-y: auto;   /* Enables vertical scrolling */
+  }
+  
+  #disastersTable {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
     border: 1px solid #ddd;
-}
-
-#disastersTable th, #disastersTable td {
+    table-layout: fixed; /* Ensures consistent column width */
+  }
+  
+  #disastersTable th, #disastersTable td {
     padding: 12px;
     text-align: left;
-}
-
-#disastersTable th {
+  }
+  
+  #disastersTable th {
     background-color: #333;
     color: white;
-}
-
-#disastersTable td {
+    position: sticky; /* Keeps the header fixed at the top */
+    top: 0; /* Ensures it stays at the top when scrolling */
+    z-index: 1; /* Keeps the header above the scrollable body */
+  }
+  
+  #disastersTable td {
     background-color: white;
-}
+  }
+  
 
 
 

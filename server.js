@@ -17,12 +17,14 @@ const victimsRoutes = require('./routes/victimsRoutes'); // Import Victims route
 const rescueoperationsRoutes = require('./routes/rescueoperationsRoutes');
 const volunteersRoutes = require('./routes/volunteersRoutes');
 const donationsRoutes = require('./routes/donationsRoutes');
+const rescueteamsRoutes = require('./routes/rescueteamsRoutes');
 
 app.use('/disasters', disasterRoutes);
 app.use('/victims', victimsRoutes); // Use Victims routes
 app.use('/rescueoperations', rescueoperationsRoutes);
 app.use('/volunteers', volunteersRoutes);
 app.use('/donations', donationsRoutes);
+app.use('/rescueteams', rescueteamsRoutes);
 
 
 
