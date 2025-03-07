@@ -115,11 +115,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // Close the modal when the close button is clicked
-document.getElementById('closeModal').addEventListener('click', function () {
+document.getElementById('closeeditModal').addEventListener('click', function () {
   document.getElementById('editDonationModal').style.display = 'none';
 });
-
-
 
 
 // Function to open the edit modal and populate it with donation data
@@ -144,6 +142,7 @@ function editDonation(donationId) {
     })
     .catch(error => console.error('Error fetching donation data:', error));
 }
+
 
 
 // Handle the form submission for updating donation
