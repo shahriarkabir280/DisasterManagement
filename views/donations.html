@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Victims - Disaster Management</title>
-  <link rel="stylesheet" href="/css/donations.css"> <!-- Link to CSS -->
+  <title>Donations - Disaster Management</title>
+  <link rel="stylesheet" href="/css/donations.css">
 </head>
 <body>
   <header>
@@ -13,8 +13,8 @@
     </div>
     <nav>
       <ul>
-        <li><a href="/disasters">Disaster</a></li>
-        <li><a href="/victims">Victim</a></li> <!-- Active link -->
+        <li><a href="/">Disaster</a></li>
+        <li><a href="/victims">Victim</a></li>
         <li><a href="/rescueOperations">RescueOperation</a></li>
         <li><a href="/volunteers">Volunteer</a></li>
         <li><a href="/donations" class="active">Donation</a></li>
@@ -23,10 +23,138 @@
   </header>
 
   <main>
-    <h2>donations Data</h2>
-    <!-- Add your content here -->
+    <h2>Donations Data</h2>
+
+
+    <!-- Statistics Container -->
+    <div class="statistics-container">
+      <div class="stat-box">
+        <h3>Number of Disasters</h3>
+        <p id="disasterCount">0</p>
+      </div>
+      <div class="stat-box">
+        <h3>Number of Affected Areas</h3>
+        <p id="affectedAreaCount">0</p>
+      </div>
+      <div id="recentDisasterBox">
+        <p class="recent-disaster-title">Most Recent Disaster</p>
+        <ul class="recent-disaster-list">
+            <li><strong>Name:</strong> <span id="disasterName">N/A</span></li>
+            <li><strong>Date:</strong> <span id="disasterDate">N/A</span></li>
+            <li><strong>Location:</strong> <span id="disasterLocation">N/A</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="filters">
+      <label for="searchInput">Search: </label>
+      <input type="text" id="searchInput" placeholder="Search anything...">
+      <button id="fetchData">Search</button>
+    </div>
+    
+    <div class="table-container">
+      <table id="donationsTable">
+        <thead>
+          <tr>
+            <th>Donation ID</th>
+            <th>Donor Name</th>
+            <th>Resource Type</th>
+            <th>Region</th>
+            <th>Quantity</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Data rows will be inserted here dynamically -->
+        </tbody>
+      </table>
+    </div>
+
+    <div class="actions">
+      <button id="addDonation">Add Donation</button>
+    </div>
   </main>
 
-  <script src="/js/donations.js"></script> <!-- Link to JS -->
+ <!-- Modal for Adding a Donation -->
+<div id="addDonationModal" class="modal">
+  <div class="modal-content">
+    <span id="closeModal" class="close">&times;</span>
+    <h2>Add Donation</h2>
+    <form id="addDonationForm">
+      <label for="DonorName">Donor Name:</label>
+      <input type="text" name="DonorName" required>
+
+      <label for="ResourceType">Resource Type:</label>
+      <input type="text" name="ResourceType">
+      
+      <label for="Region">Region:</label>
+      <div class="location-fields">
+        <label for="City">City:</label>
+        <input type="text" name="City" required>
+
+        <label for="State">State:</label>
+        <input type="text" name="State" required>
+
+        <label for="Country">Country:</label>
+        <input type="text" name="Country" required>
+      </div>
+
+      <label for="Quantity">Quantity:</label>
+      <input type="number" name="Quantity" >
+
+      <label for="Amount">Amount:</label>
+      <input type="number" name="Amount" >
+
+      <label for="Date">Date:</label>
+      <input type="date" name="Date" required>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+
+<!-- Modal for Editing a Donation -->
+<div id="editDonationModal" class="modal">
+  <div class="modal-content">
+    <span id="closeModal" class="close">&times;</span>
+    <h2>Edit Donation</h2>
+    <form id="editDonationForm">
+      <input type="hidden" id="editDonationID" name="donationId">
+
+      <label for="editDonorName">Donor Name:</label>
+      <input type="text" id="editDonorName" name="DonorName" required>
+
+      <label for="editResourceType">Resource Type:</label>
+      <input type="text" id="editResourceType" name="ResourceType">
+
+      <div class="location-fields">
+        <label for="editCity">City:</label>
+        <input type="text" id="editCity" name="City" required>
+
+        <label for="editState">State:</label>
+        <input type="text" id="editState" name="State" required>
+
+        <label for="editCountry">Country:</label>
+        <input type="text" id="editCountry" name="Country" required>
+      </div>
+
+      <label for="editQuantity">Quantity:</label>
+      <input type="number" id="editQuantity" name="Quantity">
+
+      <label for="editAmount">Amount:</label>
+      <input type="number" id="editAmount" name="Amount">
+
+      <label for="editDate">Date:</label>
+      <input type="date" id="editDate" name="Date" required>
+
+      <button type="submit">Update</button>
+    </form>
+  </div>
+</div>
+
+
+  <script src="/js/donations.js"></script>
 </body>
 </html>

@@ -60,6 +60,7 @@ h2 {
     color: #333;
 }
 
+
 .statistics-container {
     display: flex;
     justify-content: space-around;
@@ -89,82 +90,74 @@ h2 {
     margin: 10px 0;
 }
 
-
-/* Most Recent Disaster Box */
-#recentDisasterBox {
-    background-color: #1a1a1a;
-    color: white;
-    padding: 20px;
-    border-radius: 12px;
-    width: 400px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: left;
-}
-
-
-
-.recent-disaster-title {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    border-bottom: 2px solid #4CAF50;
-    padding-bottom: 5px;
-    display: inline-block;
-}
-
-.recent-disaster-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-.recent-disaster-list li {
-    font-size: 16px;
-    padding: 8px 0;
-    border-left: 4px solid #4CAF50;
-    padding-left: 10px;
-    color: #ddd;
-}
-
-.recent-disaster-list li::before {
-    content: "• ";
-    color: #4CAF50;
-    font-size: 18px;
-    font-weight: bold;
-    margin-right: 5px;
-}
-
-/* New Styling for Disasters Table */
-#disastersTable {
+/* Volunteer Page Styles */
+/* Table container with fixed height and scroll */
+.table-container {
+    max-height: 400px;  /* Adjust this height as necessary */
+    overflow-y: auto;   /* Enables vertical scrolling */
+    margin-bottom: 20px; /* Space between table and button */
+  }
+  
+  .table-container {
+    max-height: 400px;  /* Adjust this height as necessary */
+    overflow-y: auto;   /* Enables vertical scrolling */
+  }
+  
+  #donationsTable {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
     border: 1px solid #ddd;
-}
-
-#disastersTable th, #disastersTable td {
+    table-layout: fixed; /* Ensures consistent column width */
+  }
+  
+  #donationsTable th, #donationsTable td {
     padding: 12px;
     text-align: left;
-}
-
-#disastersTable th {
+  }
+  
+  #donationsTable th {
     background-color: #333;
     color: white;
-}
-
-#disastersTable td {
+    position: sticky; /* Keeps the header fixed at the top */
+    top: 0; /* Ensures it stays at the top when scrolling */
+    z-index: 1; /* Keeps the header above the scrollable body */
+  }
+  
+  #donationsTable td {
     background-color: white;
-}
-
-
-
-.filters {
+  }
+  
+  
+  /* Filters Section */
+  .filters {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-bottom: 20px;
-}
+  }
+  
+  /* Action Section (Add Volunteer Button) */
+  .actions {
+    margin-top: 20px;
+    text-align: left;
+  }
+  
+  #addVolunteer {
+    padding: 12px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  #addVolunteer:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+  }
+  
 
 /* Input Field */
 input[type="text"] {
@@ -198,16 +191,8 @@ button:hover {
     transform: scale(1.05);
 }
 
-/* Action Section */
-.actions {
-    margin-top: 20px;
-}
 
-
-
-
-
-
+/* Modal Styles */
 .modal {
     display: none;
     position: fixed;
@@ -218,9 +203,9 @@ button:hover {
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.5);
-  }
-  
-  .modal-content {
+}
+
+.modal-content {
     background-color: white;
     padding: 30px;
     border: 1px solid #ccc;
@@ -235,22 +220,44 @@ button:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
-  
-  .close {
+}
+
+.close {
     font-size: 32px;
     color: #aaa;
     cursor: pointer;
     position: absolute;
     top: 10px;
     right: 10px;
-  }
-  
-  .close:hover {
+}
+
+.close:hover {
     color: #f00;
-  }
-  
-  button {
+}
+
+input, select {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+button[type="submit"] {
     background-color: #4CAF50;
     color: white;
     padding: 12px 20px;
@@ -259,42 +266,15 @@ button:hover {
     border-radius: 8px;
     font-size: 16px;
     transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
+}
+
+button[type="submit"]:hover {
     background-color: #45a049;
-  }
-  
-  input, textarea {
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  input[type="text"], input[type="email"], textarea {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 8px;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  @media (max-width: 768px) {
+}
+
+@media (max-width: 768px) {
     .modal-content {
-      width: 80%; /* Responsive for smaller screens */
-      max-width: 500px; /* Limit the width on smaller screens */
+        width: 80%; /* Responsive for smaller screens */
+        max-width: 500px; /* Limit the width on smaller screens */
     }
-  }
-  
+}
