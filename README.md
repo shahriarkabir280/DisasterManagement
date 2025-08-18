@@ -27,7 +27,7 @@ A **web-based Disaster Management System** designed to streamline disaster respo
 ## Installation & Setup
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-handle/disaster-management.git
+   git clone git@github.com:shahriarkabir280/DisasterManagement.git
    cd disaster-management
    ```
 
