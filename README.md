@@ -1,39 +1,30 @@
-# 🌐 Disaster Management System
+# Disaster Management System
 
-A **web-based Disaster Management System** designed to streamline disaster response, resource management, and information sharing. The project focuses on efficient database handling and CRUD operations to ensure seamless management of disaster-related records.
-
----
-
-## 🚀 Features
-- **Disaster Records Management:** Create, Read, Update, and Delete (CRUD) records of disaster events.
-- **Resource Allocation:** Track resources such as shelters, food, and medical supplies.
-- **User-Friendly Interface:** Responsive web design for ease of use across devices.
-- **Database-Driven:** Efficient storage and retrieval of disaster-related data.
-- **Scalable Backend:** Built with Node.js to handle multiple concurrent requests.
+A **web-based Disaster Management System** designed to streamline disaster response, victim management, and resource allocation. The project emphasizes efficient database handling and CRUD operations to ensure seamless coordination during disasters.
 
 ---
 
-## 🛠️ Tech Stack
+## Features
+- **Victim Tracking:** Maintain records of affected individuals for efficient aid distribution.
+- **Volunteer Management:** Register and manage volunteers across disaster events.
+- **Resource Allocation:** Track shelters, food, donations, and medical supplies in real-time.
+- **Donation Management:** Manage and monitor donations from multiple sources.
+- **Rescue Event Tracking:** Log and monitor rescue operations for transparency and accountability.
+- **Statistics & Analytics:** Visualize data with charts and insights related to events, resources, and victims.
+- **User-Friendly Interface:** Responsive web design for accessibility across devices.
+- **Database-Driven:** Efficient storage and retrieval using MySQL.
+
+---
+
+## Tech Stack
 - **Frontend:** HTML, CSS
-- **Backend:** Node.js
+- **Backend:** Node.js, Express.js
 - **Database:** MySQL
-- **Other Tools:** Express.js, npm
+- **Other Tools:** npm
 
 ---
 
-## 📂 Project Structure
-```
-├── public/            # Static files (HTML, CSS, JS)
-├── routes/            # Application routes
-├── views/             # UI templates
-├── config/            # Database configuration
-├── app.js             # Main server file
-└── package.json       # Project metadata & dependencies
-```
-
----
-
-## ⚙️ Installation & Setup
+## Installation & Setup
 1. Clone the repository:
    ```bash
    git clone https://github.com/your-handle/disaster-management.git
@@ -49,7 +40,7 @@ A **web-based Disaster Management System** designed to streamline disaster respo
 
 4. Start the server:
    ```bash
-   node app.js
+   node server.js
    ```
 
 5. Open your browser and navigate to:
@@ -59,21 +50,14 @@ A **web-based Disaster Management System** designed to streamline disaster respo
 
 ---
 
-## 📸 Screenshots
-*(Add screenshots here once available)*
 
----
-
-## 🤝 Contributing
+## Contributing
 Contributions are welcome! Please fork the repo and submit a pull request.
 
 ---
 
-## 📜 License
-This project is licensed under the **MIT License**.
 
----
-
-## 👨‍💻 Author
+## Contact
 **Md. Shahriar Kabir**  
-[GitHub](https://github.com/your-handle) | [LinkedIn](https://linkedin.com/in/your-handle)
+
+Email: shahriarkabir280@gmail.com
