@@ -19,6 +19,8 @@
     "dotenv": "^16.0.0"
   },
   "overrides": {
-    "path-to-regexp": "^1.9.0"
+    "path-to-regexp": "^0.1.13",
+    "qs": "^6.15.2",
+    "body-parser": "^1.20.6"
   }
 }
