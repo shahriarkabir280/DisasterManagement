@@ -1,11 +1,15 @@
+require('dotenv').config();
 const mysql = require('mysql2');
 
-// Create a connection to the database
+// Create a connection to the database using environment variables
+// IMPORTANT: do NOT commit real credentials. Use a .env file locally and set environment variables in production.
 const db = mysql.createConnection({
-  host: 'localhost',  // Change if necessary
-  user: 'root',       // Change with your MySQL username
-  password: 'shahriar',       // Change with your MySQL password
-  database: 'disastermanagement'
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWORD || '',
+  database: process.env.DB_NAME || 'disastermanagement',
+  // Keep multipleStatements disabled to reduce risk of SQL injection via stacked queries
+  multipleStatements: false,
 });
 
 db.connect((err) => {
@@ -14,7 +18,6 @@ db.connect((err) => {
     return;
   }
   console.log('Connected to MySQL database');
-  console.log('kabir');
 });
 
 module.exports = db;
