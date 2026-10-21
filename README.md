@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/banner.webp" alt="Disaster Management System: victims, volunteers and supplies tracked in one system" width="100%" />
+</p>
+
 # Disaster Management System
 
 A **web-based Disaster Management System** designed to streamline disaster response, victim management, and resource allocation. The project emphasizes efficient database handling and CRUD operations to ensure seamless coordination during disasters.
